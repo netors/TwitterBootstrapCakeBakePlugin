@@ -174,7 +174,7 @@ echo "\t\t\t<?php
 							'false' => 'NO'
 						);
 					}
-					echo "\t\t\t\t<td>\n\t\t\t\t<?php if (\${$singularVar}['{$modelClass}']['{$field}']) { ?>\n\t\t\t\t\t<span class=\"label label-success\"><?php echo __('".$label['true']."'); ?></span>\n\t\t\t\t<?php } else { ?>\n\t\t\t\t\t<span class=\"label label-important\"><?php echo __('".$label['false']."'); ?></span>\n\t\t\t\t<?php } ?>\n\t\t\t\t</td>\n";
+					echo "\t\t\t\t<td>\n\t\t\t\t<?php if (\${$otherSingularVar}['{$field}']) { ?>\n\t\t\t\t\t<span class=\"label label-success\"><?php echo __('".$label['true']."'); ?></span>\n\t\t\t\t<?php } else { ?>\n\t\t\t\t\t<span class=\"label label-important\"><?php echo __('".$label['false']."'); ?></span>\n\t\t\t\t<?php } ?>\n\t\t\t\t</td>\n";
 				} else {
                     echo "\t\t\t\t<td><?php echo \${$otherSingularVar}['{$field}'];?></td>\n";
                 }
@@ -185,7 +185,7 @@ echo "\t\t\t<?php
 					echo "\t\t\t\t\t\t<?php echo \$this->Html->link(\$this->BootstrapIcon->css('search','white').' '.__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']), array('escape'=>false, 'class'=>'btn btn-small btn-primary')); ?>\n";
 					echo "\t\t\t\t\t\t<?php echo \$this->Html->link(\$this->BootstrapIcon->css('pencil').' '.__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']), array('escape'=>false, 'class'=>'btn btn-small btn-default')); ?>\n";
 					if ($is_active) {
-						echo "\t\t\t\t\t\t<?php if (\${$singularVar}['{$modelClass}']['is_active']) { ?>\n";
+						echo "\t\t\t\t\t\t<?php if (\${$otherSingularVar}['is_active']) { ?>\n";
 						echo "\t\t\t\t\t\t\t<?php echo \$this->Form->postLink(\$this->BootstrapIcon->css('remove','white').' '.__('Deactivate'), array('controller' => '{$details['controller']}', 'action' => 'deactivate', \${$otherSingularVar}['{$details['primaryKey']}']), array('escape'=>false, 'class'=>'btn btn-small btn-danger'), __('Are you sure you want to deactivate # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
 						echo "\t\t\t\t\t\t<?php } else { ?>\n";
 						echo "\t\t\t\t\t\t\t<?php echo \$this->Form->postLink(\$this->BootstrapIcon->css('ok','white').' '.__('Activate'), array('controller' => '{$details['controller']}', 'action' => 'activate', \${$otherSingularVar}['{$details['primaryKey']}']), array('escape'=>false, 'class'=>'btn btn-small btn-success'), __('Are you sure you want to activate # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
