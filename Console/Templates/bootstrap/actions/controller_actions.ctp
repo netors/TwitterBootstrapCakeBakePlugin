@@ -80,7 +80,7 @@
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved'),'Flash/success');
-    $this->redirect(array('action'=>'index'));
+                $this->redirect(array('action'=>'index'));
 <?php else: ?>
 				$this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
 <?php endif; ?>
