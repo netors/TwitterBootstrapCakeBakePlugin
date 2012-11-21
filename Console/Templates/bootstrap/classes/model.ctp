@@ -25,9 +25,15 @@ class <?php echo $name ?> extends <?php echo $plugin; ?>AppModel {
 	 */
 	public $useDbConfig = '<?php echo $useDbConfig; ?>';
 <?php endif;?>
-<?php if ($useTable && $useTable !== Inflector::tableize($name)):
+<?php if ($useTable && $useTable !== Inflector::tableize($name)): ?>
+
+    /**
+     * Use table
+     *
+     * @var mixed False or table name
+     */
+<?php
 	$table = "'$useTable'";
-	echo "/**\n * Use table\n *\n * @var mixed False or table name\n */\n";
 	echo "\tpublic \$useTable = $table;\n";
 endif;
 if ($primaryKey !== 'id'): ?>
