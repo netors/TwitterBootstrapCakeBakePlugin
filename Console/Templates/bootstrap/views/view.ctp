@@ -90,7 +90,7 @@ if (!empty($associations['hasOne'])) :
 				foreach ($details['fields'] as $field) {
 					$is_active = false;
 					if (in_array($field,$skip_fields)||$field===$foreignKey) continue;
-					echo "\t\t\t\t<tr>";
+					echo "\t\t\t\t<tr>\n";
 					if (substr($field,0,3)=="is_") {
 						if ($field == 'is_active') {
 							$is_active = true;
@@ -113,7 +113,7 @@ if (!empty($associations['hasOne'])) :
 						echo "\t\t\t\t\t<th class=\"span4\"><?php echo __('" . Inflector::humanize($field) . "');?></th>\n";
 						echo "\t\t\t\t\t<td><?php echo h(\${$singularVar}['{$alias}']['{$field}']);?>&nbsp;</td>\n";
 					}
-					echo "\t\t\t\t</tr>";
+					echo "\t\t\t\t</tr>\n";
 				}
 ?>
 			</tbody>
