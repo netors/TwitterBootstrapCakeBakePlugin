@@ -26,16 +26,24 @@
 					} else {
 						if ($this->templateVars['schema'][$field]['null'] == false) {
 							if (substr($field,strlen($field)-3,3)=="_id") {
-								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;')\n\t\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if ($field == 'filename') {
-								$required = ", array(\n\t\t\t\t\t\t'type' => 'file',\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;')\n\t\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'type' => 'file',\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if (substr($field,0,3)=="is_") {
-								$required = null;
+                                $required = ", array(\n\t\t\t\t\t\t'checked' => true\n\t\t\t\t\t)\n\t\t\t\t";
 							} else {
-								$required = ", array(\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;')\n\t\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
 							}
 						} else {
-							$required = null;
+                            if (substr($field,strlen($field)-3,3)=="_id") {
+                                $required = ", array(\n\t\t\t\t\t\t'empty' => true\n\t\t\t\t\t)\n\t\t\t\t";
+                            } else if ($field == 'filename') {
+                                $required = ", array(\n\t\t\t\t\t\t'type' => 'file'\n\t\t\t\t\t)\n\t\t\t\t";
+                            } else if (substr($field,0,3)=="is_") {
+                                $required = ", array(\n\t\t\t\t\t\t'checked' => true\n\t\t\t\t\t)\n\t\t\t\t";
+                            } else {
+                                $required = null;
+                            }
 						}
 						if ($field == $primaryKey || ($file&&($field=='dir'||$field=='mimetype'||$field=='filesize'))) {
 							echo "\t\t\t\t\techo \$this->BootstrapForm->hidden('{$field}');\n";
