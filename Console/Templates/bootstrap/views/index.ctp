@@ -21,7 +21,12 @@
 <?php $is_active = false; ?>
 <?php foreach ($fields as $field) { ?>
 <?php if (in_array($field,$skip_fields)) continue; ?>
-                <th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
+<?php //if (substr($field,0,3)=="is_") { ?>
+<?php if ($field == 'is_active') { ?>
+                    <th class="span1"><?php echo "<?php echo \$this->Paginator->sort('{$field}',__('Status');?>";?></th>
+<?php } else {?>
+                    <th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
+<?php } ?>
 <?php } ?>
                 <th class="span3"><?php echo "<?php echo __('Actions');?>";?></th>
             </tr>
