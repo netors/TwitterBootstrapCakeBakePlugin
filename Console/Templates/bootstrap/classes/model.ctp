@@ -60,7 +60,8 @@ $fields = array_keys($validate);
 $file = false;
 if (in_array('filename',$fields)&&in_array('dir',$fields)&&in_array('mimetype',$fields)&&in_array('filesize',$fields)) {
 	$file = true;
-	$behaviors = array('MeioUpload','CakeAttachment');
+	//$behaviors = array('MeioUpload','CakeAttachment');
+	$behaviors = array();
 	$meioUploadFields = array('filename');
 	$cakeAttachmentFields = array('filename');
 }
