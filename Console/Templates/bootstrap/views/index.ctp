@@ -11,8 +11,6 @@
     <h1 class="visible-md visible-lg"><?php echo "<?php echo __('{$pluralHumanName}');?>";?> <small><?php echo "<?php echo __('List of {$pluralHumanName}');?>";?></small></h1>
     <h1 class="visible-xs visible-sm"><?php echo "<?php echo __('{$pluralHumanName}');?>";?></h1>
 </div>
-<div class="row">
-    <div class="span12">
         <table cellpadding="0" cellspacing="0" class="table table-striped">
             <tr>
 <?php $skip_fields = array('id','hash','password','created','modified','updated'); ?>
@@ -31,7 +29,7 @@
                 <th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
 <?php } ?>
 <?php } ?>
-                <th class="span3"><?php echo "<?php echo __('Actions');?>";?></th>
+                <th class="col-md-2"><?php echo "<?php echo __('Actions');?>";?></th>
             </tr>
 <?php
         echo "\t\t\t<?php foreach (\${$pluralVar} as \${$singularVar}) { ?>\n";
@@ -114,5 +112,3 @@
 		?>\n";?>
         </p>
         <?php echo "<?php echo \$this->Paginator->pagination(array('ul' => 'pagination')); ?>\n"; ?>
-    </div>
-</div>
