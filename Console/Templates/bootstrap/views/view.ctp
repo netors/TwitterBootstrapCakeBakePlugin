@@ -80,8 +80,10 @@
 <?php
 if (!empty($associations['hasOne'])) :
     foreach ($associations['hasOne'] as $alias => $details): ?>
-        <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-pencil')).' '.__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class'=>'btn btn-sm btn-default visible-md visible-lg','escape'=>false)); ?>\n";?>
-        <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-pencil')), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class'=>'btn btn-sm btn-default visible-xs visible-sm','escape'=>false)); ?>\n";?>
+        <div class="btn-group pull-right">
+            <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-pencil')).' '.__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class'=>'btn btn-sm btn-default visible-md visible-lg','escape'=>false)); ?>\n";?>
+            <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-pencil')), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class'=>'btn btn-sm btn-default visible-xs visible-sm','escape'=>false)); ?>\n";?>
+        </div>
         <h3><?php echo "<?php echo __('" . Inflector::humanize($details['controller']) . "');?>";?></h3>
         <?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
         <table class="table">
