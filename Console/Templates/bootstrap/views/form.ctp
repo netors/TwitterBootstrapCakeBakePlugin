@@ -4,16 +4,33 @@
 <?php echo " */\n"; ?>
 <?php echo "?>\n"; ?>
 <div class="page-header">
-	<?php echo "<?php echo \$this->Html->link(\$this->BootstrapIcon->css('list-alt','black').' '.__('List " . $singularHumanName . "'), array('action' => 'index'), array('class'=>'btn btn-default btn-small pull-right','escape'=>false)); ?>\n";?>
-    <h1><?php echo "<?php echo __('{$pluralHumanName}');?>";?> <small><?php echo "<?php echo __('" . Inflector::humanize($action) . " %s', __('" . $singularHumanName . "')); ?>"; ?></small></h1>
+    <div class="btn-group pull-right">
+        <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-list-alt')).' '.__('List " . $singularHumanName . "'), array('action' => 'index'), array('class'=>'btn btn-default visible-md visible-lg','escape'=>false)); ?>\n";?>
+        <?php echo "<?php echo \$this->Html->link(\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-list-alt')), array('action' => 'index'), array('class'=>'btn btn-default visible-xs visible-sm','escape'=>false)); ?>\n";?>
+    </div>
+    <h1 class="visible-md visible-lg"><?php echo "<?php echo __('{$pluralHumanName}');?>";?> <small><?php echo "<?php echo __('" . Inflector::humanize($action) . " %s', __('" . $singularHumanName . "')); ?>"; ?></small></h1>
+    <h1 class="visible-xs visible-sm"><?php echo "<?php echo __('{$pluralHumanName}');?>";?></h1>
 </div>
-<div class="row">
-    <div class="span12">
 <?php if (in_array('filename',$fields)&&in_array('dir',$fields)&&in_array('mimetype',$fields)&&in_array('filesize',$fields)) { ?>
-		<?php echo "<?php echo \$this->BootstrapForm->create('{$modelClass}', array('class' => 'form-horizontal', 'type' => 'file'));?>\n";?>
+		<?php echo "<?php echo \$this->Form->create('{$modelClass}', array(
+            'inputDefaults' => array(
+                'div' => 'form-group',
+                'wrapInput' => false,
+                'class' => 'form-control'
+            ),
+            'class' => 'well',
+            'type' => 'form'
+        ));?>\n";?>
 <?php $file = true; ?>
 <?php } else { ?>
-		<?php echo "<?php echo \$this->BootstrapForm->create('{$modelClass}', array('class' => 'form-horizontal'));?>\n";?>
+		<?php echo "<?php echo \$this->Form->create('{$modelClass}', array(
+            'inputDefaults' => array(
+                'div' => 'form-group',
+                'wrapInput' => false,
+                'class' => 'form-control'
+            ),
+            'class' => 'well'
+        ));?>\n";?>
 <?php $file = false; ?>
 <?php } ?>
 			<fieldset>
@@ -26,43 +43,41 @@
 					} else {
 						if ($this->templateVars['schema'][$field]['null'] == false) {
 							if (substr($field,strlen($field)-3,3)=="_id") {
-								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if ($field == 'filename') {
-								$required = ", array(\n\t\t\t\t\t\t'type' => 'file',\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'type' => 'file',\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if (substr($field,0,3)=="is_") {
-                                $required = ", array(\n\t\t\t\t\t\t'checked' => true\n\t\t\t\t\t)\n\t\t\t\t";
+                                $required = ", array(\n\t\t\t\t\t\t'checked' => true,\n\t\t\t\t\t\t'label' => __('".Inflector::humanize(substr($field,3,strlen($field)))."'),\n\t\t\t\t\t\t'class' => '',\n\t\t\t\t\t)\n\t\t\t\t";
 							} else {
-								$required = ", array(\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'helpInline' => '<span class=\"label label-important\">' . __('Required') . '</span>&nbsp;'\n\t\t\t\t\t)\n\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
 							}
 						} else {
                             if (substr($field,strlen($field)-3,3)=="_id") {
-                                $required = ", array(\n\t\t\t\t\t\t'empty' => true\n\t\t\t\t\t)\n\t\t\t\t";
+                                $required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t)\n\t\t\t\t";
                             } else if ($field == 'filename') {
-                                $required = ", array(\n\t\t\t\t\t\t'type' => 'file'\n\t\t\t\t\t)\n\t\t\t\t";
+                                $required = ", array(\n\t\t\t\t\t\t'type' => 'file,'\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t)\n\t\t\t\t";
                             } else if (substr($field,0,3)=="is_") {
-                                $required = ", array(\n\t\t\t\t\t\t'checked' => true\n\t\t\t\t\t)\n\t\t\t\t";
+                                $required = ", array(\n\t\t\t\t\t\t'checked' => true,\n\t\t\t\t\t\t'label' => __('".Inflector::humanize(substr($field,3,strlen($field)))."'),\n\t\t\t\t\t\t'class' => '',\n\t\t\t\t\t)\n\t\t\t\t";
                             } else {
                                 $required = null;
                             }
 						}
 						if ($field == $primaryKey || ($file&&($field=='dir'||$field=='mimetype'||$field=='filesize'))) {
-							echo "\t\t\t\t\techo \$this->BootstrapForm->hidden('{$field}');\n";
+							echo "\t\t\t\t\techo \$this->Form->hidden('{$field}');\n";
 						} else {
-							echo "\t\t\t\t\techo \$this->BootstrapForm->input('{$field}'{$required});\n";
+							echo "\t\t\t\t\techo \$this->Form->input('{$field}'{$required});\n";
 						}
 					}
 				}
 				if (!empty($associations['hasAndBelongsToMany'])) {
 					foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
-						echo "\t\t\t\t\techo \$this->BootstrapForm->input('{$assocName}');\n";
+						echo "\t\t\t\t\techo \$this->Form->input('{$assocName}');\n";
 					}
 				}
 				echo "\t\t\t\t?>\n";
-				echo "\t\t\t\t<?php echo \$this->BootstrapForm->submit(__('Submit'), array('class'=>'btn btn-primary'));?>\n";
+				echo "\t\t\t\t<?php echo \$this->Form->submit(__('Submit'), array('class'=>'btn btn-primary'));?>\n";
 ?>
 			</fieldset>
 		<?php
-			echo "<?php echo \$this->BootstrapForm->end();?>\n";
+			echo "<?php echo \$this->Form->end();?>\n";
 		?>
-	</div>
-</div>
