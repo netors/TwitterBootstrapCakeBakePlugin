@@ -34,7 +34,7 @@
 <?php $file = false; ?>
 <?php } ?>
 			<fieldset>
-<?php $skip_fields = array('created','modified','updated'); ?>
+<?php $skip_fields = array('created','modified','updated','lft','rght'); ?>
 <?php
 				echo "\t\t\t\t<?php\n";
 				foreach ($fields as $field) {
