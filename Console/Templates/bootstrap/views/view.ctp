@@ -150,6 +150,8 @@ foreach ($relations as $alias => $details):
 			foreach ($details['fields'] as $field) {
 				if (in_array($field,$skip_fields)||$field===$foreignKey||substr($field,-9)=='parent_id') {
                     continue;
+                } else if (substr($field,0,3)=="is_") {
+                    echo "\t\t\t\t<th class=\"col-md-1\"><?php echo __('" . Inflector::humanize(substr($field,3,strlen($field))) . "'); ?></th>\n";
                 } else if (substr($field,-3)=="_id") {
                     echo "\t\t\t\t<th><?php echo __('" . Inflector::humanize(substr($field,0,strlen($field)-3)) . "'); ?></th>\n";
                 } else {
@@ -166,7 +168,7 @@ echo "\t\t\t<?php
         echo "\t\t\t<tr>\n";
             foreach ($details['fields'] as $field) {
 				$is_active = false;
-				if (in_array($field,$skip_fields)||$field===$foreignKey) continue;
+				if (in_array($field,$skip_fields)||$field===$foreignKey||substr($field,-9)=='parent_id') continue;
                 if (substr($field,-3)=="_id") {
                     echo "\t\t\t\t<td><?php echo \$this->Html->link(\${$otherSingularVar}['".Inflector::classify(substr($field,0,strlen($field)-3))."']['name'], array('controller'=>'".Inflector::tableize(substr($field,0,strlen($field)-3))."', 'action' => 'view', \${$otherSingularVar}['{$field}']));?></td>\n";
 				} else if (substr($field,0,3)=="is_") {
@@ -182,7 +184,7 @@ echo "\t\t\t<?php
 							'false' => 'NO'
 						);
 					}
-					echo "\t\t\t\t<td>\n";
+					echo "\t\t\t\t<td class=\"col-md-1\">\n";
                     echo "\t\t\t\t<?php if (\${$otherSingularVar}['{$field}']) { ?>\n";
                     echo "\t\t\t\t\t<?php echo \$this->Html->tag('span',__('".$label['true']."'),array('class'=>'label label-success visible-md visible-lg')); ?>\n";
                     echo "\t\t\t\t\t<?php echo \$this->Html->tag('span',\$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-ok-sign')),array('class'=>'label label-success visible-xs visible-sm')); ?>\n";
