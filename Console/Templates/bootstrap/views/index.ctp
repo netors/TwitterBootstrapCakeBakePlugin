@@ -13,7 +13,7 @@
 </div>
         <table cellpadding="0" cellspacing="0" class="table table-striped">
             <tr>
-<?php $skip_fields = array('id','hash','password','created','modified','updated'); ?>
+<?php $skip_fields = array('id','hash','password','created','modified','updated','lft','rght'); ?>
 <?php
 	if (in_array('filename',$fields)&&in_array('dir',$fields)&&in_array('mimetype',$fields)&&in_array('filesize',$fields)) {
 		$filefields = array('dir','mimetype');
