@@ -148,7 +148,7 @@ foreach ($relations as $alias => $details):
 			$skip_fields = array('id','hash','password','created','modified','updated','lft','rght');
 			$foreignKey = strtolower($singularHumanName).'_id';
 			foreach ($details['fields'] as $field) {
-				if (in_array($field,$skip_fields)||$field===$foreignKey) {
+				if (in_array($field,$skip_fields)||$field===$foreignKey||substr($field,-9)=='parent_id') {
                     continue;
                 } else if (substr($field,-3)=="_id") {
                     echo "\t\t\t\t<th><?php echo __('" . Inflector::humanize(substr($field,0,strlen($field)-3)) . "'); ?></th>\n";

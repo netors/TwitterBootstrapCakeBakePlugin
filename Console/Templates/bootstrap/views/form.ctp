@@ -43,7 +43,7 @@
 					} else {
 						if ($this->templateVars['schema'][$field]['null'] == false) {
 							if (substr($field,strlen($field)-3,3)=="_id") {
-								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
+								$required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize(substr($field,0,strlen($field)-3))."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if ($field == 'filename') {
 								$required = ", array(\n\t\t\t\t\t\t'type' => 'file',\n\t\t\t\t\t\t'required' => 'required',\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t\t'after' => '<span class=\"label label-danger label-xs pull-right\">* Required</span><span class=\"help-block\">&nbsp;</span>'\n\t\t\t\t\t)\n\t\t\t\t";
 							} else if (substr($field,0,3)=="is_") {
@@ -53,7 +53,7 @@
 							}
 						} else {
                             if (substr($field,strlen($field)-3,3)=="_id") {
-                                $required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t)\n\t\t\t\t";
+                                $required = ", array(\n\t\t\t\t\t\t'empty' => true,\n\t\t\t\t\t\t'label' => __('".Inflector::humanize(substr($field,0,strlen($field)-3))."'),\n\t\t\t\t\t)\n\t\t\t\t";
                             } else if ($field == 'filename') {
                                 $required = ", array(\n\t\t\t\t\t\t'type' => 'file,'\n\t\t\t\t\t\t'label' => __('".Inflector::humanize($field)."'),\n\t\t\t\t\t)\n\t\t\t\t";
                             } else if (substr($field,0,3)=="is_") {
