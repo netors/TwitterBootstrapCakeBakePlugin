@@ -90,7 +90,9 @@
 <?php endif; ?>
 			}
 		} else {
-			$this->request->data = $this-><?php echo $currentModelName; ?>->read(null, $id);
+            $conditions = array('<?php echo $currentModelName ?>.id'=>$id);
+            $<?php echo Inflector::singularize(Inflector::variable($currentModelName)); ?> = $this-><?php echo $currentModelName; ?>->find('first', compact('conditions'));
+			$this->request->data = $<?php echo Inflector::singularize(Inflector::variable($currentModelName)); ?>;
 		}
 <?php
 	foreach (array('belongsTo', 'hasAndBelongsToMany') as $assoc):
