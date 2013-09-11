@@ -29,7 +29,7 @@ class <?php echo $controllerName; ?>Controller extends <?php echo $plugin; ?>App
 <?php else: ?>
 <?php
 if (count($helpers)):
-	echo "/**\n * Helpers\n *\n * @var array\n */\n";
+	echo "\t/**\n\t * Helpers\n\t *\n\t * @var array\n\t */\n";
 	echo "\tpublic \$helpers = array(";
 	for ($i = 0, $len = count($helpers); $i < $len; $i++):
 		if ($i != $len - 1):
@@ -42,7 +42,7 @@ if (count($helpers)):
 endif;
 
 if (count($components)):
-	echo "/**\n * Components\n *\n * @var array\n */\n";
+	echo "\t/**\n\t * Components\n\t *\n\t * @var array\n\t */\n";
 	echo "\tpublic \$components = array(";
 	for ($i = 0, $len = count($components); $i < $len; $i++):
 		if ($i != $len - 1):
