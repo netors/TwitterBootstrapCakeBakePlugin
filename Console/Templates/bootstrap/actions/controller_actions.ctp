@@ -37,7 +37,7 @@
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved'),'Flash/success');
-				$this->redirect(array('action'=>'index'));
+				return $this->redirect(array('action'=>'index'));
 <?php else: ?>
 				$this->flash(__('<?php echo ucfirst(strtolower($currentModelName)); ?> saved.'), array('action' => 'index'));
 <?php endif; ?>
@@ -80,7 +80,7 @@
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved'),'Flash/success');
-                $this->redirect(array('action'=>'index'));
+                return $this->redirect(array('action'=>'index'));
 <?php else: ?>
 				$this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
 <?php endif; ?>
@@ -128,7 +128,7 @@
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
 			$this->Session->setFlash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> deleted'),'Flash/success');
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 <?php else: ?>
 			$this->flash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> deleted'), array('action' => 'index'));
 <?php endif; ?>
@@ -138,7 +138,7 @@
 <?php else: ?>
 		$this->flash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> was not deleted'), array('action' => 'index'));
 <?php endif; ?>
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 
 	/**
@@ -157,10 +157,10 @@
 		}
 		if ($this-><?php echo $currentModelName; ?>->updateAll(array('is_active'=>0),array('<?php echo $currentModelName; ?>.id'=>$id))) {
 			$this->Session->setFlash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> deactivated'),'Flash/success');
-			$this->redirect($this->referer());
+			return $this->redirect($this->referer());
 		}
 		$this->Session->setFlash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> was not deactivated'),'Flash/error');
-		$this->redirect($this->referer());
+		return $this->redirect($this->referer());
 	}
 
 	/**
@@ -179,8 +179,8 @@
 		}
 		if ($this-><?php echo $currentModelName; ?>->updateAll(array('is_active'=>1),array('<?php echo $currentModelName; ?>.id'=>$id))) {
 			$this->Session->setFlash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> activated'),'Flash/success');
-			$this->redirect($this->referer());
+			return $this->redirect($this->referer());
 		}
 		$this->Session->setFlash(__('<?php echo ucfirst(strtolower($singularHumanName)); ?> was not activated'),'Flash/error');
-		$this->redirect($this->referer());
+		return $this->redirect($this->referer());
 	}
